@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cupcake">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Weather App</title>
+
+        <style>
+            * {
+                font-family: monospace;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container mx-auto">
+            <div class="flex justify-center pt-10 drop-shadow">
+                <label class="input input-bordered flex items-center gap-2">
+                    <input type="text" class="grow w-96 js-city-input" placeholder="Enter city name" />
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 opacity-70">
+                        <path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" />
+                    </svg>
+                </label>
+                <button class="btn ml-4 js-search-btn">Search</button>
+            </div>
+            <div class="grid grid-cols-2 h-[25rem] w-full rounded-lg mt-10 drop-shadow bg-[url('./images/clear-background.jpg')]  bg-cover bg-center bg-no-repeat js-bg-image">
+                <div class="flex flex-col justify-center pl-[120px]">
+                    <h1 class="text-[2rem] js-city-time text-white">-</h1>
+                    <h1 class="text-[7rem] js-city-temp text-white">-</h1>
+                    <h1 class="text-[2rem] js-city-name text-white">-</h1>
+                </div>
+                <div class="flex flex-col justify-center items-center">
+                    <div class="text-[2rem]">
+                        <img class="w-[150px] h-[150px] icon-weather" src="./images/cloud.svg" alt="" srcset="" />
+                    </div>
+                    <div class="text-center">
+                        <h1 class="text-[1.5rem] js-weather-con font-bold text-white">-</h1>
+                        <h1 class="text-[1.5rem] js-weather-desc font-bold text-white">-</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-rows-3 grid-flow-col gap-x-[5rem] gap-y-[1.5rem] mt-5 px-[2.75rem] py-[20px] h-[40rem] drop-shadow">
+                <div class="row-span-2 bg-white w-full rounded-lg">
+                    <div class="grid grid-rows-2 grid-flow-col h-full ">
+                        <div class="flex justify-center items-center border-b-[1px] border-r-[1px] border-zinc-200">
+                            <div class="text-xl px-4">
+                                <svg class="svg-icon-cloud" fill="#000000" width="80px" height="80px" viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <style>
+                                            .cls-1 {
+                                                fill: none;
+                                            }
+                                        </style>
+                                    </defs>
+                                    <title>humidity--alt</title>
+                                    <path d="M26,12a3.8978,3.8978,0,0,1-4-3.777,3.9017,3.9017,0,0,1,.6533-2.0639L25.17,2.4141a1.0381,1.0381,0,0,1,1.6592,0L29.3154,6.11A3.9693,3.9693,0,0,1,30,8.223,3.8978,3.8978,0,0,1,26,12Zm0-7.2368L24.3438,7.2257A1.89,1.89,0,0,0,24,8.223a2.0139,2.0139,0,0,0,4,0,1.98,1.98,0,0,0-.375-1.0466Z" transform="translate(0)" />
+                                    <path d="M23.5,30H8.5A6.4962,6.4962,0,0,1,7.2,17.1381a8.9938,8.9938,0,0,1,17.6006,0A6.4964,6.4964,0,0,1,23.5,30ZM16,12a7,7,0,0,0-6.9414,6.1452l-.0991.8122-.8155.064A4.4962,4.4962,0,0,0,8.5,28h15a4.4962,4.4962,0,0,0,.3564-8.9786l-.8154-.064-.0986-.8122A7.0022,7.0022,0,0,0,16,12Z" transform="translate(0)" />
+                                    <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32" />
+                                </svg>
+                            </div>
+                            <div class="text-xl">
+                                <h1>Humidity</h1>
+                                <h1 class="js-humidity font-bold">-</h1>
+                            </div>
+                        </div>
+                        <div class="flex justify-center items-center border-r-[1px] border-zinc-200">
+                            <div class="text-xl px-4">
+                                <svg width="80px" height="80px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path class="svg-wind"
+                                        d="M15.7639 7C16.3132 6.38625 17.1115 6 18 6C19.6569 6 21 7.34315 21 9C21 10.6569 19.6569 12 18 12H3M8.50926 4.66667C8.87548 4.2575 9.40767 4 10 4C11.1046 4 12 4.89543 12 6C12 7.10457 11.1046 8 10 8H3M11.5093 19.3333C11.8755 19.7425 12.4077 20 13 20C14.1046 20 15 19.1046 15 18C15 16.8954 14.1046 16 13 16H3"
+                                        stroke="#000"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </div>
+                            <div class="text-xl">
+                                <h1>Wind</h1>
+                                <h1 class="js-wind font-bold">-</h1>
+                            </div>
+                        </div>
+                        <div class="flex justify-center items-center border-b-[1px] border-zinc-200">
+                            <div class="text-xl px-4">
+                                <svg width="80px" height="80px" viewBox="0 -1 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                    <title>sunset</title>
+                                    <desc>Created with Sketch Beta.</desc>
+                                    <defs></defs>
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                        <g class="svg-sunset" id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-257.000000, -829.000000)" fill="#000000">
+                                            <path
+                                                d="M285,851 L259,851 C258.448,851 258,851.448 258,852 C258,852.553 258.448,853 259,853 L285,853 C285.552,853 286,852.553 286,852 C286,851.448 285.552,851 285,851 L285,851 Z M260,837.414 C260.391,837.805 261.024,837.805 261.414,837.414 C261.805,837.023 261.805,836.391 261.414,836 L260,834.586 C259.609,834.195 258.977,834.195 258.586,834.586 C258.195,834.977 258.195,835.609 258.586,836 L260,837.414 L260,837.414 Z M286,847 L258,847 C257.448,847 257,847.447 257,848 C257,848.553 257.448,849 258,849 L286,849 C286.552,849 287,848.553 287,848 C287,847.447 286.552,847 286,847 L286,847 Z M282,855 L262,855 C261.448,855 261,855.448 261,856 C261,856.553 261.448,857 262,857 L282,857 C282.552,857 283,856.553 283,856 C283,855.448 282.552,855 282,855 L282,855 Z M272,833 C272.552,833 273,832.553 273,832 L273,830 C273,829.447 272.552,829 272,829 C271.448,829 271,829.447 271,830 L271,832 C271,832.553 271.448,833 272,833 L272,833 Z M284,837.414 L285.414,836 C285.805,835.609 285.805,834.977 285.414,834.586 C285.024,834.195 284.391,834.195 284,834.586 L282.586,836 C282.195,836.391 282.195,837.023 282.586,837.414 C282.977,837.805 283.609,837.805 284,837.414 L284,837.414 Z M262.218,845 C263.146,840.438 267.161,837 272,837 C276.839,837 280.854,840.438 281.782,845 L283.886,845 C283.118,839.359 278.096,835 272,835 C265.904,835 260.882,839.359 260.114,845 L262.218,845 L262.218,845 Z"
+                                                id="sunset"
+                                                sketch:type="MSShapeGroup"
+                                            ></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="text-xl">
+                                <h1>Sunset</h1>
+                                <h1 class="js-sunset font-bold">-</h1>
+                            </div>
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <div class="text-xl px-4">
+                                <svg class="js-svg-icon" width="80px" height="80px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path class="svg-sunrise" fill="#000000" d="M82.56 640a448 448 0 1 1 858.88 0h-67.2a384 384 0 1 0-724.288 0H82.56zM32 704h960q32 0 32 32t-32 32H32q-32 0-32-32t32-32zm256 128h448q32 0 32 32t-32 32H288q-32 0-32-32t32-32z" /></svg>
+                            </div>
+                            <div class="text-xl">
+                                <h1>Sunrise</h1>
+                                <h1 class="js-sunrise font-bold">-</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white w-full rounded-lg"></div>
+                <div class="bg-white row-span-3 col-span-2 w-full rounded-lg">
+                    <div class="text-2xl font-bold pl-14 pt-10">Next 3 hour Forecast </div>
+                    <div class="grid grid-cols-5 js-forecast h-full">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</html>
