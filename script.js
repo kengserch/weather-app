@@ -84,7 +84,7 @@ function displayWeather(currentData, forecastData) {
         weatherData = item.weather[0]
 
         forecastSummaryHTML += `
-        <div class="p-4 text-center text-sm flex flex-col  items-center">
+        <div class="flex flex-col p-4 text-center justify-center items-center text-sm ">
            <div class="mb-[50px] mt-[100px]">
              <h1 class="mb-4 text-xl font-bold">${(item.main.temp - 273.15).toFixed(0)}°C</h1>
              <img class="w-[100px] h-[100px] js-icon-forecast" src="${getForecastTheme(weatherData.id)}" />

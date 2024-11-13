@@ -13,25 +13,25 @@
     </head>
 
     <body>
-        <div class="container mx-auto">
+        <div class="container mx-auto px-2">
             <div class="flex justify-center pt-10 drop-shadow">
                 <label class="input input-bordered flex items-center gap-2">
-                    <input type="text" class="grow w-96 js-city-input" placeholder="Enter city name" />
+                    <input type="text" class="grow w-44 lg:w-96 js-city-input" placeholder="Enter city name" />
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 opacity-70">
                         <path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" />
                     </svg>
                 </label>
                 <button class="btn ml-4 js-search-btn">Search</button>
             </div>
-            <div class="grid grid-cols-2 h-[25rem] w-full rounded-lg mt-10 drop-shadow bg-[url('./images/clear-background.jpg')]  bg-cover bg-center bg-no-repeat js-bg-image">
-                <div class="flex flex-col justify-center pl-[120px]">
-                    <h1 class="text-[2rem] js-city-time text-white">-</h1>
-                    <h1 class="text-[7rem] js-city-temp text-white">-</h1>
-                    <h1 class="text-[2rem] js-city-name text-white">-</h1>
+            <div class=" grid grid-rows-2 h-[25rem] w-full rounded-lg mt-10 drop-shadow bg-[url('./images/clear-background.jpg')]  bg-cover bg-center bg-no-repeat js-bg-image lg:grid-cols-2">
+                <div class="flex flex-col items-center justify-center  lg:pl-[120px] lg:items-start lg:justify-center lg:h-[25rem] ">
+                    <h1 class="text-[1.5rem] js-city-time text-white lg:text-[2rem] ">-</h1>
+                    <h1 class="text-[3rem] js-city-temp text-white lg:text-[7rem] ">-</h1>
+                    <h1 class="text-[1.5rem] js-city-name text-white lg:text-[2rem] ">-</h1>
                 </div>
-                <div class="flex flex-col justify-center items-center">
+                <div class="flex flex-col justify-center items-center lg:h-[25rem]">
                     <div class="text-[2rem]">
-                        <img class="w-[150px] h-[150px] icon-weather" src="./images/cloud.svg" alt="" srcset="" />
+                        <img class="w-[50px] h-[50px] lg:w-[150px] lg:h-[150px] icon-weather" src="./images/cloud.svg" alt="" srcset="" />
                     </div>
                     <div class="text-center">
                         <h1 class="text-[1.5rem] js-weather-con font-bold text-white">-</h1>
@@ -39,9 +39,9 @@
                     </div>
                 </div>
             </div>
-            <div class="grid grid-rows-3 grid-flow-col gap-x-[5rem] gap-y-[1.5rem] mt-5 px-[2.75rem] py-[20px] h-[40rem] drop-shadow">
+            <div class="grid grid-rows-6 grid-flow-col px-[0.5rem] lg:grid lg:grid-rows-3 lg:grid-flow-col gap-x-[5rem] gap-y-[1.5rem] mt-5 lg:px-[2.75rem] py-[20px] h-max drop-shadow">
                 <div class="row-span-2 bg-white w-full rounded-lg">
-                    <div class="grid grid-rows-2 grid-flow-col h-full ">
+                    <div class="grid grid-rows-4 grid-flow-col h-full lg:grid-rows-2 ">
                         <div class="flex justify-center items-center border-b-[1px] border-r-[1px] border-zinc-200">
                             <div class="text-xl px-4">
                                 <svg class="svg-icon-cloud" fill="#000000" width="80px" height="80px" viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg">
@@ -114,9 +114,9 @@
                     </div>
                 </div>
                 <div class="bg-white w-full rounded-lg"></div>
-                <div class="bg-white row-span-3 col-span-2 w-full rounded-lg">
-                    <div class="text-2xl font-bold pl-14 pt-10">Next 3 hour Forecast </div>
-                    <div class="grid grid-cols-5 js-forecast h-full">
+                <div class="bg-white row-span-3  h-max w-full rounded-lg lg:col-span-2 lg:h-auto  ">
+                    <div class="text-2xl font-bold text-center lg:pl-14 pt-10">Next 3 hour Forecast </div>
+                    <div class="grid grid-cols-3  js-forecast  lg:grid-cols-5">
 
                     </div>
                 </div>
