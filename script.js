@@ -8,6 +8,9 @@ const cityDisplay = document.querySelector('.js-city-name')
 const tempDisplay = document.querySelector('.js-city-temp')
 const weatherDisplay = document.querySelector('.js-weather-con')
 const descDisplay = document.querySelector('.js-weather-desc')
+const pressureDisplay = document.querySelector('.js-pressure')
+const visibilityDisplay = document.querySelector('.js-visibility')
+
 
 async function handleSearch() {
     const city = cityInput.value
@@ -70,10 +73,11 @@ function displayWeather(currentData, forecastData) {
     const {
         dt: date,
         name: city,
-        main: { temp, humidity },
+        main: { temp, humidity, pressure },
         weather: [{ id, main, description }],
         wind: { speed },
         sys: { sunset, sunrise },
+        visibility: visibility
     } = currentData
 
     let forecastSummaryHTML = ''
@@ -85,9 +89,9 @@ function displayWeather(currentData, forecastData) {
 
         forecastSummaryHTML += `
         <div class="flex flex-col p-4 text-center justify-center items-center text-sm ">
-           <div class="mb-[50px] mt-[100px]">
-             <h1 class="mb-4 text-xl font-bold">${(item.main.temp - 273.15).toFixed(0)}°C</h1>
-             <img class="w-[100px] h-[100px] js-icon-forecast" src="${getForecastTheme(weatherData.id)}" />
+           <div class="mb-[50px] mt-[50px]">
+             <h1 class="mb-4 text-xl font-bold">${covertToCelsius(item.main.temp)}°C</h1>
+             <img class="w-[80px] h-[80px] js-icon-forecast" src="${getForecastTheme(weatherData.id)}" />
            </div>
             <div class="text-lg">
                 <h1>${weatherData.main}</h1>
@@ -108,13 +112,16 @@ function displayWeather(currentData, forecastData) {
 
     timeDisplay.textContent = formatTime(date)
     cityDisplay.textContent = city
-    tempDisplay.textContent = `${(temp - 273.15).toFixed(0)}°C`
+    tempDisplay.textContent = `${covertToCelsius(temp)}°C`
     weatherDisplay.textContent = main
     descDisplay.textContent = description
     humidityDisplay.textContent = `${humidity} %`
     windDisplay.textContent = `${speed} m/s`
     sunsetDisplay.textContent = formatTime(sunset)
     sunriseDisplay.textContent = formatTime(sunrise)
+    pressureDisplay.textContent = `Pressure : ${pressure} hPa`
+    visibilityDisplay.textContent = `Visibility : ${visibility/1000} km`
+
 }
 
 function getWeatherTheme(id) {
@@ -235,6 +242,10 @@ function getForecastTheme(id) {
 function formatTime(unixTimestamp) {
     const date = new Date(unixTimestamp * 1000) // แปลงจากวินาทีเป็นมิลลิวินาที
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) // ตั้งค่าให้แสดงเฉพาะชั่วโมงและนาที
+}
+
+function covertToCelsius(temp){
+    return (temp - 273.15).toFixed(0)
 }
 
 //displayWeather(801)
