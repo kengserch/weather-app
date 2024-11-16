@@ -1,75 +1,18 @@
-const apikey = 'c7a9141ba456396b5ddbb2b429504f94'
+import { formatTime, covertToCelsius } from './utils.js'
 
-const cityInput = document.querySelector('.js-city-input')
-const searchBtn = document.querySelector('.js-search-btn')
+export function displayWeather(currentData, forecastData) {
+    const timeDisplay = document.querySelector('.js-city-time')
+    const cityDisplay = document.querySelector('.js-city-name')
+    const tempDisplay = document.querySelector('.js-city-temp')
+    const weatherDisplay = document.querySelector('.js-weather-con')
+    const descDisplay = document.querySelector('.js-weather-desc')
+    const pressureDisplay = document.querySelector('.js-pressure')
+    const visibilityDisplay = document.querySelector('.js-visibility')
+    const humidityDisplay = document.querySelector('.js-humidity')
+    const windDisplay = document.querySelector('.js-wind')
+    const sunsetDisplay = document.querySelector('.js-sunset')
+    const sunriseDisplay = document.querySelector('.js-sunrise')
 
-const timeDisplay = document.querySelector('.js-city-time')
-const cityDisplay = document.querySelector('.js-city-name')
-const tempDisplay = document.querySelector('.js-city-temp')
-const weatherDisplay = document.querySelector('.js-weather-con')
-const descDisplay = document.querySelector('.js-weather-desc')
-const pressureDisplay = document.querySelector('.js-pressure')
-const visibilityDisplay = document.querySelector('.js-visibility')
-
-
-async function handleSearch() {
-    const city = cityInput.value
-    if (city) {
-        await fetchWeather(city)
-    }
-}
-
-searchBtn.addEventListener('click', (event) => {
-    event.preventDefault()
-    handleSearch()
-})
-
-cityInput.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') {
-        event.preventDefault()
-        handleSearch()
-    }
-})
-
-// cityInput.addEventListener('keydown', async (event) => {
-//     if (event.key === 'Enter') {
-//         const city = cityInput.value
-
-//         if (city) {
-//             await fetchWeather(city)
-//         }
-//         event.preventDefault()
-//     }
-// })
-
-async function fetchWeather(city) {
-    try {
-        const currentResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}`)
-        const forecaseResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=5&appid=${apikey}`)
-
-        if (!currentResponse.ok) {
-            throw new Error(`Response status: ${currentResponse.status}`)
-        }
-        if (!forecaseResponse.ok) {
-            throw new Error(`Response status: ${forecaseResponse.status}`)
-        }
-        const currentData = await currentResponse.json()
-        const forecastData = await forecaseResponse.json()
-        console.log('current', currentData)
-        //console.log('forecast',forecastData)
-        displayWeather(currentData, forecastData)
-        //displayWeather(forecastData)
-    } catch (error) {
-        console.log(error)
-        Swal.fire({
-            title: 'City Not Found',
-            text: 'Please try again',
-            icon: 'error',
-        })
-    }
-}
-
-function displayWeather(currentData, forecastData) {
     const {
         dt: date,
         name: city,
@@ -77,8 +20,22 @@ function displayWeather(currentData, forecastData) {
         weather: [{ id, main, description }],
         wind: { speed },
         sys: { sunset, sunrise },
-        visibility: visibility
+        visibility: visibility,
     } = currentData
+
+    timeDisplay.textContent = formatTime(date)
+    cityDisplay.textContent = city
+    tempDisplay.textContent = `${covertToCelsius(temp)}°C`
+    weatherDisplay.textContent = main
+    descDisplay.textContent = description
+    humidityDisplay.textContent = `${humidity} %`
+    windDisplay.textContent = `${speed} m/s`
+    sunsetDisplay.textContent = formatTime(sunset)
+    sunriseDisplay.textContent = formatTime(sunrise)
+    pressureDisplay.textContent = `Pressure : ${pressure} hPa`
+    visibilityDisplay.textContent = `Visibility : ${visibility / 1000} km`
+
+    setWeatherTheme(id)
 
     let forecastSummaryHTML = ''
     let weatherData
@@ -91,7 +48,7 @@ function displayWeather(currentData, forecastData) {
         <div class="flex flex-col p-4 text-center justify-center items-center text-sm ">
            <div class="mb-[50px] mt-[50px]">
              <h1 class="mb-4 text-xl font-bold">${covertToCelsius(item.main.temp)}°C</h1>
-             <img class="w-[80px] h-[80px] js-icon-forecast" src="${getForecastTheme(weatherData.id)}" />
+             <img class="w-[80px] h-[80px] js-icon-forecast" src="${setForecastIcon(weatherData.id)}" />
            </div>
             <div class="text-lg">
                 <h1>${weatherData.main}</h1>
@@ -102,38 +59,16 @@ function displayWeather(currentData, forecastData) {
     })
 
     document.querySelector('.js-forecast').innerHTML = forecastSummaryHTML
-
-    getWeatherTheme(id)
-
-    const humidityDisplay = document.querySelector('.js-humidity')
-    const windDisplay = document.querySelector('.js-wind')
-    const sunsetDisplay = document.querySelector('.js-sunset')
-    const sunriseDisplay = document.querySelector('.js-sunrise')
-
-    timeDisplay.textContent = formatTime(date)
-    cityDisplay.textContent = city
-    tempDisplay.textContent = `${covertToCelsius(temp)}°C`
-    weatherDisplay.textContent = main
-    descDisplay.textContent = description
-    humidityDisplay.textContent = `${humidity} %`
-    windDisplay.textContent = `${speed} m/s`
-    sunsetDisplay.textContent = formatTime(sunset)
-    sunriseDisplay.textContent = formatTime(sunrise)
-    pressureDisplay.textContent = `Pressure : ${pressure} hPa`
-    visibilityDisplay.textContent = `Visibility : ${visibility/1000} km`
-
 }
 
-function getWeatherTheme(id) {
+function setWeatherTheme(id) {
+    const body = document.querySelector('body')
     const bgImage = document.querySelector('.js-bg-image')
     const iconWeather = document.querySelector('.icon-weather')
-
     const iconCloud = document.querySelector('.svg-icon-cloud')
     const iconWind = document.querySelector('.svg-wind')
     const iconSunset = document.querySelector('.svg-sunset')
     const iconSunrise = document.querySelector('.svg-sunrise')
-
-    const body = document.querySelector('body')
 
     // Thunderstorm
     if (id >= 200 && id <= 232) {
@@ -209,7 +144,7 @@ function getWeatherTheme(id) {
     }
 }
 
-function getForecastTheme(id) {
+function setForecastIcon(id) {
     // Thunderstorm
     if (id >= 200 && id <= 232) {
         return '/images/forecast-icon/storm.svg'
@@ -238,16 +173,3 @@ function getForecastTheme(id) {
         return '/images/forecast-icon/cloud.svg'
     }
 }
-
-function formatTime(unixTimestamp) {
-    const date = new Date(unixTimestamp * 1000) // แปลงจากวินาทีเป็นมิลลิวินาที
-    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) // ตั้งค่าให้แสดงเฉพาะชั่วโมงและนาที
-}
-
-function covertToCelsius(temp){
-    return (temp - 273.15).toFixed(0)
-}
-
-//displayWeather(801)
-
-fetchWeather('bangkok')
