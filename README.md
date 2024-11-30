@@ -1,5 +1,4 @@
 # weather-app
-===
 
 ## Use OpenWeather api
 * https://openweathermap.org/api
