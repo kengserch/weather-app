@@ -5,7 +5,7 @@
 
 ### Function
 * Display Current Weather Data
-* Display 5 Day / 3 Hour Forecast
+* Display 3 Hour Forecast
 * Search by city name
 * Display weather theme by Current Weather Data
 
