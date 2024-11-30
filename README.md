@@ -26,7 +26,7 @@
 
 * Thunderstorm, Drizzle, Rain, Snow, Atmosphere, Clear, Clouds
 
-#### Responsive
+### Responsive
 ![phone](https://github.com/user-attachments/assets/860b901b-0df1-4774-b14d-b3a8e28d7ad2) 
 
 ![tablet](https://github.com/user-attachments/assets/db7b6674-a198-48c1-bdee-d1785dad6834)
