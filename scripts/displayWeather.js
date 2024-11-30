@@ -12,7 +12,10 @@ export function displayWeather(currentData, forecastData) {
     const windDisplay = document.querySelector('.js-wind')
     const sunsetDisplay = document.querySelector('.js-sunset')
     const sunriseDisplay = document.querySelector('.js-sunrise')
+    let forecastSummaryHTML = ''
+    let weatherData
 
+    
     const {
         dt: date,
         name: city,
@@ -22,6 +25,8 @@ export function displayWeather(currentData, forecastData) {
         sys: { sunset, sunrise },
         visibility: visibility,
     } = currentData
+
+    
 
     timeDisplay.textContent = formatTime(date)
     cityDisplay.textContent = city
@@ -35,13 +40,10 @@ export function displayWeather(currentData, forecastData) {
     pressureDisplay.textContent = `Pressure : ${pressure} hPa`
     visibilityDisplay.textContent = `Visibility : ${visibility / 1000} km`
 
-    setWeatherTheme(id)
-
-    let forecastSummaryHTML = ''
-    let weatherData
+    
 
     forecastData.list.forEach((item) => {
-        //console.log(item)
+        console.log(item)
         weatherData = item.weather[0]
 
         forecastSummaryHTML += `
@@ -59,6 +61,8 @@ export function displayWeather(currentData, forecastData) {
     })
 
     document.querySelector('.js-forecast').innerHTML = forecastSummaryHTML
+
+    setWeatherTheme(id)
 }
 
 function setWeatherTheme(id) {
@@ -69,7 +73,6 @@ function setWeatherTheme(id) {
     const iconWind = document.querySelector('.svg-wind')
     const iconSunset = document.querySelector('.svg-sunset')
     const iconSunrise = document.querySelector('.svg-sunrise')
-
     // Thunderstorm
     if (id >= 200 && id <= 232) {
         body.style.backgroundColor = '#3b3b3b'
@@ -125,10 +128,6 @@ function setWeatherTheme(id) {
         iconWind.style.stroke = '#FFA07A'
         iconSunset.style.fill = '#FFA07A'
         iconSunrise.style.fill = '#FFA07A'
-        cityDisplay.style.color = '#1C274C'
-        tempDisplay.style.color = '#1C274C'
-        weatherDisplay.style.color = '#1C274C'
-        descDisplay.style.color = '#1C274C'
         iconWeather.src = '/images/clear.svg'
         bgImage.style.backgroundImage = "url('./images/clear-background.jpg')"
     }
